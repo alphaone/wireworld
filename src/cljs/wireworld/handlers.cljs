@@ -6,13 +6,19 @@
 (re-frame/register-handler
   :initialize-db
   (fn [_ _]
-    db/default-db))
+    (merge db/default-db (db/ls->board))))
 
 (re-frame/register-handler
   :inc-counter
   (re-frame/path :count)
   (fn [old-count _]
     (inc old-count)))
+
+;; middleware for any handler that manipulates todos
+(def board-middleware [(re-frame/path :board)               ;; 1st param to handler will be the value from this path
+                       (re-frame/after db/board->ls!)       ;; write to localstore each time
+                       re-frame/trim-v])                    ;; remove the first (event id) element from the event vec
+
 
 (defn reset [current]
   (case current
@@ -21,13 +27,13 @@
 
 (re-frame/register-handler
   :reset
-  (re-frame/path :board)
+  board-middleware
   (fn [old-board _]
     (vec (map (fn [l] (vec (map reset l))) old-board))))
 
 (re-frame/register-handler
   :clear
-  (re-frame/path :board)
+  board-middleware
   (fn [old-board _]
     (vec (map (fn [l] (vec (map (constantly :e) l))) old-board))))
 
@@ -36,23 +42,23 @@
     :e :c
     :c :h
     :h :t
-    :t :e))
+    :t :c))
 
 (re-frame/register-handler
   :toggle
-  [(re-frame/path :board) re-frame/trim-v]
+  board-middleware
   (fn [board [x y]]
     (update-in board [y x] toggle)))
 
 (re-frame/register-handler
   :empty
-  [(re-frame/path :board) re-frame/trim-v]
+  board-middleware
   (fn [board [x y]]
     (assoc-in board [y x] :e)))
 
 (re-frame/register-handler
   :step
-  (re-frame/path :board)
+  board-middleware
   (fn [board _]
     (re-frame/dispatch [:inc-counter])
     (game/advance-board board)))
