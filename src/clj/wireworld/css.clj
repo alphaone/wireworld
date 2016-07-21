@@ -14,7 +14,7 @@
             [:div {:width  "100%"
                    :height "100%"}
              [:&.empty {:background-color "#2c3e50"
-                        :border           "1px solid #2c3e50"}]
+                        :border           "1px solid #34495e"}]
              [:&.conductor {:background-color "#f1c40f"
                             :border           "1px solid #f39c12"}]
              [:&.head {:background-color "#ecf0f1"
