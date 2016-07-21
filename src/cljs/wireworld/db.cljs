@@ -6,7 +6,7 @@
 (def default-db
   {:count 0
    :to    nil
-   :board (->> (repeat initial-x false)
+   :board (->> (repeat initial-x :e)
                vec
                (repeat initial-y)
                vec)})

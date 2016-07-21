@@ -8,17 +8,16 @@
                       (nth cy nil)
                       (nth cx nil)))))
 
-(defn will-live? [neighbors current]
-  (let [alive-neighbors (count (filter true? neighbors))]
-    (cond
-      (< 3 alive-neighbors) false
-      (= 3 alive-neighbors) true
-      (> 2 alive-neighbors) false
-      :else current
-      )))
+(defn next-state [neighbors current]
+  (let [heads-in-neighborhood (count (filter #(= :h %) neighbors))]
+    (case current
+      :e :e
+      :h :t
+      :t :c
+      :c (if (contains? #{1 2} heads-in-neighborhood) :h :c))))
 
 (defn advance-cell [board [x y]]
-  (will-live? (neighbors board [x y]) (-> board (nth y) (nth x))))
+  (next-state (neighbors board [x y]) (-> board (nth y) (nth x))))
 
 (defn advance-line [board y line]
   (vec (map-indexed #(advance-cell board [% y]) line)))

@@ -1,11 +1,21 @@
 (ns wireworld.views
   (:require [re-frame.core :as re-frame]))
 
-(defn cell [y x alive?]
-  [:div {:key      [x y]
-         :class    "cell"
-         :on-click #(re-frame/dispatch [:toggle x y])}
-   [:div {:class (if alive? "alive" "dead")}]]
+(defn class-for-type [type]
+  (case type
+    :e "empty"
+    :c "conductor"
+    :t "tail"
+    :h "head"))
+
+(defn cell [y x cell-type]
+  [:div {:key             [x y]
+         :class           "cell"
+         :on-click        #(re-frame/dispatch [:toggle x y])
+         :on-context-menu (fn [evt] 
+                            (.preventDefault evt) 
+                            (re-frame/dispatch [:empty x y]))}
+   [:div {:class (class-for-type cell-type)}]]
   )
 
 (defn line [y l]
@@ -24,7 +34,7 @@
     (fn []
       [:div
        [:div
-        [:button {:on-click #(re-frame/dispatch [:random])} "Random"]
+        [:button {:on-click #(re-frame/dispatch [:reset])} "Reset Electrons"]
         [:button {:on-click #(re-frame/dispatch [:clear])} "Clear"]]
 
        [board]

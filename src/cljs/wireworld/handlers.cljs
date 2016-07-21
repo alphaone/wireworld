@@ -14,23 +14,41 @@
   (fn [old-count _]
     (inc old-count)))
 
+(defn reset [current]
+  (case current
+    :e :e
+    :c))
+
 (re-frame/register-handler
-  :random
+  :reset
   (re-frame/path :board)
   (fn [old-board _]
-    (map (fn [l] (map #(= 0 (rand-int 2)) l)) old-board)))
+    (vec (map (fn [l] (vec (map reset l))) old-board))))
 
 (re-frame/register-handler
   :clear
   (re-frame/path :board)
   (fn [old-board _]
-    (map (fn [l] (map (constantly false) l)) old-board)))
+    (vec (map (fn [l] (vec (map (constantly :e) l))) old-board))))
+
+(defn toggle [current]
+  (case current
+    :e :c
+    :c :h
+    :h :t
+    :t :e))
 
 (re-frame/register-handler
   :toggle
   [(re-frame/path :board) re-frame/trim-v]
   (fn [board [x y]]
-    (update-in board [y x] not)))
+    (update-in board [y x] toggle)))
+
+(re-frame/register-handler
+  :empty
+  [(re-frame/path :board) re-frame/trim-v]
+  (fn [board [x y]]
+    (assoc-in board [y x] :e)))
 
 (re-frame/register-handler
   :step
