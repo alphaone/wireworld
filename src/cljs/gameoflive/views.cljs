@@ -1,4 +1,4 @@
-(ns gameoflive.views
+(ns wireworld.views
   (:require [re-frame.core :as re-frame]))
 
 (defn cell [y x alive?]

@@ -1,1 +1,1 @@
-(ns gameoflive.core)
+(ns wireworld.core)

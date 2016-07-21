@@ -1,7 +1,7 @@
-(ns gameoflive.runner
+(ns wireworld.runner
     (:require [doo.runner :refer-macros [doo-tests]]
-              [gameoflive.core-test]
-              [gameoflive.game-test]))
+              [wireworld.core-test]
+              [wireworld.game-test]))
 
-(doo-tests 'gameoflive.core-test)
-(doo-tests 'gameoflive.game-test)
+(doo-tests 'wireworld.core-test)
+(doo-tests 'wireworld.game-test)

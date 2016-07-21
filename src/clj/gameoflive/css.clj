@@ -1,4 +1,4 @@
-(ns gameoflive.css
+(ns wireworld.css
   (:require [garden.def :refer [defstyles]]))
 
 (def cell-size 15)

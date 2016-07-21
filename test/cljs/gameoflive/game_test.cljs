@@ -1,6 +1,6 @@
-(ns gameoflive.game-test
+(ns wireworld.game-test
   (:require [cljs.test :refer-macros [deftest testing is]]
-            [gameoflive.game :as game]))
+            [wireworld.game :as game]))
 
 (def d false)
 (def a true)

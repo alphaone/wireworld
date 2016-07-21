@@ -1,7 +1,7 @@
-(ns gameoflive.handlers
+(ns wireworld.handlers
   (:require [re-frame.core :as re-frame]
-            [gameoflive.db :as db]
-            [gameoflive.game :as game]))
+            [wireworld.db :as db]
+            [wireworld.game :as game]))
 
 (re-frame/register-handler
   :initialize-db

@@ -1,4 +1,4 @@
-(ns gameoflive.config)
+(ns wireworld.config)
 
 (def debug?
   ^boolean js/goog.DEBUG)

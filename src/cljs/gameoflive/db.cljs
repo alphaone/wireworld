@@ -1,4 +1,4 @@
-(ns gameoflive.db)
+(ns wireworld.db)
 
 (def initial-x 60)
 (def initial-y 30)

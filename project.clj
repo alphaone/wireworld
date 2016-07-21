@@ -1,4 +1,4 @@
-(defproject gameoflive "0.1.0-SNAPSHOT"
+(defproject wireworld "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.8.51"]
                  [reagent "0.5.1"]
@@ -21,7 +21,7 @@
 
   :garden {:builds [{:id           "screen"
                      :source-paths ["src/clj"]
-                     :stylesheet   gameoflive.css/screen
+                     :stylesheet   wireworld.css/screen
                      :compiler     {:output-to     "resources/public/css/screen.css"
                                     :pretty-print? true}}]}
 
@@ -33,8 +33,8 @@
 
   :cljsbuild {:builds [{:id           "dev"
                         :source-paths ["src/cljs"]
-                        :figwheel     {:on-jsload "gameoflive.core/mount-root"}
-                        :compiler     {:main                 gameoflive.core
+                        :figwheel     {:on-jsload "wireworld.core/mount-root"}
+                        :compiler     {:main                 wireworld.core
                                        :output-to            "resources/public/js/compiled/app.js"
                                        :output-dir           "resources/public/js/compiled/out"
                                        :asset-path           "js/compiled/out"
@@ -42,7 +42,7 @@
 
                        {:id           "min"
                         :source-paths ["src/cljs"]
-                        :compiler     {:main            gameoflive.core
+                        :compiler     {:main            wireworld.core
                                        :output-to       "resources/public/js/compiled/app.js"
                                        :optimizations   :advanced
                                        :closure-defines {goog.DEBUG false}
@@ -50,7 +50,7 @@
                        {:id           "test"
                         :source-paths ["src/cljs" "test/cljs"]
                         :compiler     {:output-to     "resources/public/js/compiled/test.js"
-                                       :main          gameoflive.runner
+                                       :main          wireworld.runner
                                        :optimizations :none}}
                        ]}
 

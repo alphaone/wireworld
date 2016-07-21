@@ -1,4 +1,4 @@
-(ns gameoflive.game)
+(ns wireworld.game)
 
 (defn neighbors [board [x y]]
   (filter some? (for [cy (range (dec y) (+ y 2))

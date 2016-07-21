@@ -1,11 +1,11 @@
-(ns gameoflive.core
+(ns wireworld.core
     (:require [reagent.core :as reagent]
               [re-frame.core :as re-frame]
               [devtools.core :as devtools]
-              [gameoflive.handlers]
-              [gameoflive.subs]
-              [gameoflive.views :as views]
-              [gameoflive.config :as config]))
+              [wireworld.handlers]
+              [wireworld.subs]
+              [wireworld.views :as views]
+              [wireworld.config :as config]))
 
 
 (defn dev-setup []
